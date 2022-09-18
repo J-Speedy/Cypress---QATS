@@ -1,13 +1,32 @@
 /// <reference types="cypress" />
 
 describe('Task 2', () => {
-    beforeEach(() => {
+    
+    const baseURL = 'https://reqres.in'
 
-        //Open app and sign in
-        cy.visit('https://reqres.in/')
-        cy.get(':nth-child(2) > .nav-link').click()
-        cy.get(':nth-child(1) > .form-control').type('tech_task@qats.sk')
-        cy.get(':nth-child(2) > .form-control').type('124lkjAF89as')
-        cy.get('.btn').click()
-        cy.wait(1000)
-    }) 
+    //STATUS verification
+    it('GET-status', () => {
+        cy.request({
+            method : 'GET',
+            url : baseURL + '/api/users?page=2',
+        
+        }).then(({status}) => {
+            expect(status).to.eql(200)
+        })
+    })
+        
+    it('GET-body', () => {
+        cy.request({
+            method : 'GET',
+            url : baseURL + '/api/users?page=2',
+        
+        }).then(({body}) => {
+            expect(body.total).to.eql(12)
+            expect(body.data[0].last_name).to.eql('Lawson')
+            expect(body.data[1].last_name).to.eql('Ferguson')
+            expect(body.data.length).to.be.lessThan(body.total)
+        })
+    })
+
+    
+}) 
