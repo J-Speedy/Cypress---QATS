@@ -3,19 +3,8 @@
 describe('Task 2', () => {
     
     const baseURL = 'https://reqres.in'
-
-    //STATUS verification
-    it('GET-status', () => {
-        cy.request({
-            method : 'GET',
-            url : baseURL + '/api/users?page=2',
-        
-        }).then(({status}) => {
-            expect(status).to.eql(200)
-        })
-    })
-        
-    it('GET-body', () => {
+     
+    it('TC_1 - GET', () => {
         cy.request({
             method : 'GET',
             url : baseURL + '/api/users?page=2',
