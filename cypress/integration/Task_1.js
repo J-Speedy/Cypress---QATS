@@ -38,6 +38,7 @@ describe('Task 1', () => {
     afterEach(() => {
 
     //Logout
+    cy.wait(1000)
     cy.get(':nth-child(3) > .nav-link').click()
     cy.get('.btn-outline-danger').click()
     cy.get(':nth-child(2) > .nav-link').should('contain', 'Sign in') //verifiy log out was successfull
